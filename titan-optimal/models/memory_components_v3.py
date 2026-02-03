@@ -22,6 +22,7 @@ class CircularTensorBuffer(nn.Module):
     
     Replaces Python deque with tensor-based circular buffer for speed.
     Maintains separate buffers per batch item.
+    IMPROVEMENT: Dynamic batch size resizing support.
     """
     
     def __init__(self, batch_size: int, buffer_size: int, dim: int):
@@ -47,6 +48,45 @@ class CircularTensorBuffer(nn.Module):
             'filled_counts',
             torch.zeros(batch_size, dtype=torch.long)
         )
+    
+    def resize_batch(self, new_batch_size: int):
+        """IMPROVEMENT: Resize buffers when batch size changes.
+        
+        Args:
+            new_batch_size: New batch size
+        """
+        if new_batch_size == self.batch_size:
+            return
+        
+        device = self.keys_buffer.device
+        
+        if new_batch_size > self.batch_size:
+            # Expand buffers
+            extra_batches = new_batch_size - self.batch_size
+            self.keys_buffer = torch.cat([
+                self.keys_buffer,
+                torch.zeros(extra_batches, self.buffer_size, self.dim, device=device)
+            ], dim=0)
+            self.values_buffer = torch.cat([
+                self.values_buffer,
+                torch.zeros(extra_batches, self.buffer_size, self.dim, device=device)
+            ], dim=0)
+            self.write_positions = torch.cat([
+                self.write_positions,
+                torch.zeros(extra_batches, dtype=torch.long, device=device)
+            ], dim=0)
+            self.filled_counts = torch.cat([
+                self.filled_counts,
+                torch.zeros(extra_batches, dtype=torch.long, device=device)
+            ], dim=0)
+        else:
+            # Shrink buffers
+            self.keys_buffer = self.keys_buffer[:new_batch_size]
+            self.values_buffer = self.values_buffer[:new_batch_size]
+            self.write_positions = self.write_positions[:new_batch_size]
+            self.filled_counts = self.filled_counts[:new_batch_size]
+        
+        self.batch_size = new_batch_size
     
     def add(self, keys: torch.Tensor, values: torch.Tensor):
         """Add new memories to circular buffer.
