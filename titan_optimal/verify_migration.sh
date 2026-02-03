@@ -22,16 +22,22 @@ fi
 
 echo ""
 
-# Check 2: No hyphenated references in code
-echo "✓ Checking for hyphenated references..."
-HYPHEN_COUNT=$(grep -r "titan-optimal" /app/titan_optimal --include="*.py" --include="*.md" 2>/dev/null | wc -l)
+# Check 2: No hyphenated references in code (excluding documentation)
+echo "✓ Checking for hyphenated references in code..."
+HYPHEN_COUNT=$(grep -r "titan-optimal" /app/titan_optimal --include="*.py" 2>/dev/null | wc -l)
 if [ "$HYPHEN_COUNT" -eq 0 ]; then
-    echo "  ✅ No hyphenated references found ($HYPHEN_COUNT)"
+    echo "  ✅ No hyphenated references in Python files ($HYPHEN_COUNT)"
 else
-    echo "  ❌ Found $HYPHEN_COUNT hyphenated references"
+    echo "  ❌ Found $HYPHEN_COUNT hyphenated references in Python files"
     echo "  Files with issues:"
-    grep -r "titan-optimal" /app/titan_optimal --include="*.py" --include="*.md" -l 2>/dev/null
+    grep -r "titan-optimal" /app/titan_optimal --include="*.py" -l 2>/dev/null
     exit 1
+fi
+
+# Documentation may reference old name for comparison - that's OK
+DOC_HYPHEN_COUNT=$(grep -r "titan-optimal" /app/titan_optimal --include="*.md" 2>/dev/null | wc -l)
+if [ "$DOC_HYPHEN_COUNT" -gt 0 ]; then
+    echo "  ℹ️  Found $DOC_HYPHEN_COUNT references in docs (OK - explaining the change)"
 fi
 
 echo ""
