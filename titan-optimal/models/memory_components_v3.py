@@ -98,6 +98,10 @@ class CircularTensorBuffer(nn.Module):
         batch_size, seq_len, dim = keys.shape
         device = keys.device
         
+        # IMPROVEMENT: Resize if batch size changed
+        if batch_size != self.batch_size:
+            self.resize_batch(batch_size)
+        
         # Ensure buffers are on correct device
         if self.keys_buffer.device != device:
             self.keys_buffer = self.keys_buffer.to(device)
