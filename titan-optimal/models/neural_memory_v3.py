@@ -316,7 +316,13 @@ class HierarchicalMemoryV3(nn.Module):
         """Consolidate high-surprise memories from short → medium.
         
         Issue #2 & #6 fix: Surprise-driven consolidation.
+        IMPROVEMENT: Check memory pressure before consolidation.
         """
+        # IMPROVEMENT: Check if medium-term is nearly full
+        if self.is_memory_full('medium_term', threshold=0.95):
+            # Force consolidation to long-term to make room
+            self.consolidate_to_long(device)
+        
         # Get recent memories from circular buffer
         recent_keys, recent_values = self.short_term_buffer.get_recent()
         
