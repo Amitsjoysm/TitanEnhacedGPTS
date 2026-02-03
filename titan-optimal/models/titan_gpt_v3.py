@@ -274,7 +274,10 @@ class TitanGPTModelV3(nn.Module):
         update_memory: bool = True,
         mode: str = "train"
     ) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
-        """Forward pass with auxiliary losses."""
+        """Forward pass with auxiliary losses.
+        
+        IMPROVEMENT: Auxiliary losses scaled by number of layers for consistency.
+        """
         batch_size, seq_len = in_idx.shape
         device = in_idx.device
         
@@ -310,6 +313,14 @@ class TitanGPTModelV3(nn.Module):
             # Aggregate losses
             for k, v in aux_losses.items():
                 all_aux_losses[k] = all_aux_losses.get(k, 0.0) + v
+        
+        # IMPROVEMENT: Scale auxiliary losses by number of layers for consistency
+        n_layers = self.cfg["n_layers"]
+        for k in all_aux_losses:
+            if isinstance(all_aux_losses[k], torch.Tensor):
+                all_aux_losses[k] = all_aux_losses[k] / n_layers
+            elif isinstance(all_aux_losses[k], (int, float)):
+                all_aux_losses[k] = all_aux_losses[k] / n_layers
         
         # Output
         x = self.final_norm(x)
