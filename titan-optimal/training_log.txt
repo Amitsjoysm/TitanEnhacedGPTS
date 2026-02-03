@@ -1,0 +1,27 @@
+
+================================================================================
+TITAN-GPT V2 TRAINING - SMALL & MEDIUM MODELS
+================================================================================
+Device: cpu
+CPU cores: 4
+
+Loading training data...
+Downloading training data...
+✓ Data downloaded
+✓ Loaded 20479 characters
+
+================================================================================
+TRAINING SMALL MODEL
+================================================================================
+CPU mode: batch_size=2, grad_accum=8
+Train batches: 4
+Val batches: 1
+
+Initializing Titan-GPT V2 SMALL model...
+✓ Model initialized with 228,384,000 parameters
+
+================================================================================
+Training Titan-V2-SMALL
+================================================================================
+Total parameters: 228,384,000
+Device: cpu
