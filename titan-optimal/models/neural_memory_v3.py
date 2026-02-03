@@ -460,6 +460,90 @@ class HierarchicalMemoryV3(nn.Module):
         self.long_timestamps.zero_()
         self.long_access_count.zero_()
         self.global_timestamp = torch.tensor(0)
+    
+    def resize_batch(self, new_batch_size: int):
+        """Resize all memory buffers for new batch size.
+        
+        Args:
+            new_batch_size: New batch size
+        """
+        if new_batch_size == self.batch_size:
+            return
+        
+        device = self.medium_keys.device
+        
+        # Resize short-term circular buffer
+        self.short_term_buffer.resize_batch(new_batch_size)
+        
+        if new_batch_size > self.batch_size:
+            # Expand buffers
+            extra_batches = new_batch_size - self.batch_size
+            
+            # Medium-term
+            self.medium_keys = torch.cat([
+                self.medium_keys,
+                torch.zeros(extra_batches, self.medium_term_size, self.dim, device=device)
+            ], dim=0)
+            self.medium_values = torch.cat([
+                self.medium_values,
+                torch.zeros(extra_batches, self.medium_term_size, self.dim, device=device)
+            ], dim=0)
+            self.medium_importance = torch.cat([
+                self.medium_importance,
+                torch.zeros(extra_batches, self.medium_term_size, device=device)
+            ], dim=0)
+            self.medium_timestamps = torch.cat([
+                self.medium_timestamps,
+                torch.zeros(extra_batches, self.medium_term_size, device=device)
+            ], dim=0)
+            
+            # Long-term
+            if self.use_compression:
+                compressed_dim = self.dim // self.compression.compression_ratio
+                self.long_keys = torch.cat([
+                    self.long_keys,
+                    torch.zeros(extra_batches, self.long_term_size, compressed_dim, device=device)
+                ], dim=0)
+                self.long_values = torch.cat([
+                    self.long_values,
+                    torch.zeros(extra_batches, self.long_term_size, compressed_dim, device=device)
+                ], dim=0)
+            else:
+                self.long_keys = torch.cat([
+                    self.long_keys,
+                    torch.zeros(extra_batches, self.long_term_size, self.dim, device=device)
+                ], dim=0)
+                self.long_values = torch.cat([
+                    self.long_values,
+                    torch.zeros(extra_batches, self.long_term_size, self.dim, device=device)
+                ], dim=0)
+            
+            self.long_importance = torch.cat([
+                self.long_importance,
+                torch.zeros(extra_batches, self.long_term_size, device=device)
+            ], dim=0)
+            self.long_timestamps = torch.cat([
+                self.long_timestamps,
+                torch.zeros(extra_batches, self.long_term_size, device=device)
+            ], dim=0)
+            self.long_access_count = torch.cat([
+                self.long_access_count,
+                torch.zeros(extra_batches, self.long_term_size, device=device)
+            ], dim=0)
+        else:
+            # Shrink buffers
+            self.medium_keys = self.medium_keys[:new_batch_size]
+            self.medium_values = self.medium_values[:new_batch_size]
+            self.medium_importance = self.medium_importance[:new_batch_size]
+            self.medium_timestamps = self.medium_timestamps[:new_batch_size]
+            
+            self.long_keys = self.long_keys[:new_batch_size]
+            self.long_values = self.long_values[:new_batch_size]
+            self.long_importance = self.long_importance[:new_batch_size]
+            self.long_timestamps = self.long_timestamps[:new_batch_size]
+            self.long_access_count = self.long_access_count[:new_batch_size]
+        
+        self.batch_size = new_batch_size
 
 
 class NeuralMemoryV3(nn.Module):
