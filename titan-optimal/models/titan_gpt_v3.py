@@ -289,6 +289,9 @@ class TitanGPTModelV3(nn.Module):
         # Update batch size if changed
         if batch_size != self.batch_size:
             self.batch_size = batch_size
+            # Resize memory buffers in all blocks
+            for block in self.trf_blocks:
+                block.resize_batch(batch_size)
         
         # Embeddings
         tok_embeds = self.tok_emb(in_idx)
