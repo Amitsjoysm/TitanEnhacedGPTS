@@ -8,7 +8,7 @@ import tiktoken
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent))
-sys.path.append("/app/ch04/01_main-chapter-code")
+sys.path.append("/app/ch04/01_main_chapter_code")
 
 from models.titan_gpt import TitanGPTModel
 from configs.model_configs import get_model_config

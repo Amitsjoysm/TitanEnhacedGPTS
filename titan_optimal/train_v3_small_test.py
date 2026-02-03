@@ -12,7 +12,7 @@ from pathlib import Path
 
 # Add required paths
 sys.path.append(str(Path(__file__).parent.parent))
-sys.path.append("/app/ch04/01_main-chapter-code")
+sys.path.append("/app/ch04/01_main_chapter_code")
 
 from models.titan_gpt_v3 import TitanGPTModelV3
 from configs.model_configs_v3 import get_model_config_v3, get_training_config_v3
@@ -35,7 +35,7 @@ def main():
     
     # Load data
     print("\nLoading training data...")
-    data_path = "/app/ch05/01_main-chapter-code/the-verdict.txt"
+    data_path = "/app/ch05/01_main_chapter_code/the-verdict.txt"
     
     if not os.path.exists(data_path):
         import requests

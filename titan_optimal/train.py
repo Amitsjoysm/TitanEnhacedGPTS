@@ -31,7 +31,7 @@ from training.compute_optimal import (
 )
 
 # Import from existing codebase
-sys.path.append("/app/ch04/01_main-chapter-code")
+sys.path.append("/app/ch04/01_main_chapter_code")
 from gpt import GPTDatasetV1, create_dataloader_v1
 
 
@@ -220,7 +220,7 @@ def main():
     
     # Load data
     print("\nLoading training data...")
-    data_path = "/app/ch05/01_main-chapter-code/the-verdict.txt"
+    data_path = "/app/ch05/01_main_chapter_code/the-verdict.txt"
     
     if not os.path.exists(data_path):
         # Download if not exists

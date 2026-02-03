@@ -92,14 +92,14 @@ def clone_repo():
     
     # Add to path
     sys.path.append(repo_path)
-    sys.path.append(f"{repo_path}/ch04/01_main-chapter-code")
+    sys.path.append(f"{repo_path}/ch04/01_main_chapter_code")
     sys.path.append(f"{repo_path}/titan-optimal")
     
     return repo_path
 
 def download_training_data():
     """Download training data."""
-    data_path = "/content/LLMs-from-scratch/ch05/01_main-chapter-code/the-verdict.txt"
+    data_path = "/content/LLMs-from-scratch/ch05/01_main_chapter_code/the-verdict.txt"
     
     if not os.path.exists(data_path):
         print("📥 Downloading training data...")

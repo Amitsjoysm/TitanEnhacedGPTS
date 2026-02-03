@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).parent.parent))
-sys.path.append("/app/ch04/01_main-chapter-code")
+sys.path.append("/app/ch04/01_main_chapter_code")
 
 from models.titan_gpt_v3 import TitanGPTModelV3
 from configs.model_configs_v3 import get_model_config_v3
@@ -34,7 +34,7 @@ device = torch.device("cpu")
 torch.manual_seed(123)
 
 # Load data
-data_path = "/app/ch05/01_main-chapter-code/the-verdict.txt"
+data_path = "/app/ch05/01_main_chapter_code/the-verdict.txt"
 with open(data_path, "r", encoding="utf-8") as f:
     text_data = f.read()
 
