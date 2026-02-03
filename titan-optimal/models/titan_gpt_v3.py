@@ -14,7 +14,7 @@ Key Features:
 
 import torch
 import torch.nn as nn
-from typing import Optional, Dict, Tuple
+from typing import Optional, Dict, Tuple, List
 from .neural_memory_v3 import NeuralMemoryV3
 
 
