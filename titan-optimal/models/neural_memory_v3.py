@@ -266,6 +266,47 @@ class HierarchicalMemoryV3(nn.Module):
     def add_to_short_term(self, keys: torch.Tensor, values: torch.Tensor):
         """Add to short-term circular buffer."""
         self.short_term_buffer.add(keys, values)
+        
+        # IMPROVEMENT: Update memory usage tracking
+        filled = self.short_term_buffer.filled_counts.float().mean()
+        self.short_term_usage = filled / self.short_term_size
+    
+    def get_memory_pressure(self) -> Dict[str, float]:
+        """IMPROVEMENT: Get memory pressure/usage statistics.
+        
+        Returns:
+            Dictionary with usage ratios for each tier (0.0-1.0)
+        """
+        # Short-term usage from circular buffer
+        short_usage = self.short_term_usage.item()
+        
+        # Medium-term usage (count non-zero importance)
+        medium_filled = (self.medium_importance > 0).float().sum(dim=1).mean()
+        medium_usage = (medium_filled / self.medium_term_size).item()
+        
+        # Long-term usage
+        long_filled = (self.long_importance > 0).float().sum(dim=1).mean()
+        long_usage = (long_filled / self.long_term_size).item()
+        
+        return {
+            'short_term': short_usage,
+            'medium_term': medium_usage,
+            'long_term': long_usage,
+            'overall': (short_usage + medium_usage + long_usage) / 3.0
+        }
+    
+    def is_memory_full(self, tier: str = 'overall', threshold: float = 0.9) -> bool:
+        """IMPROVEMENT: Check if memory tier is nearly full.
+        
+        Args:
+            tier: 'short_term', 'medium_term', 'long_term', or 'overall'
+            threshold: Usage threshold (0.0-1.0)
+            
+        Returns:
+            True if memory usage exceeds threshold
+        """
+        pressure = self.get_memory_pressure()
+        return pressure[tier] > threshold
     
     def consolidate_to_medium(
         self,
