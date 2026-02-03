@@ -773,3 +773,13 @@ class NeuralMemoryV3(nn.Module):
             self.hierarchical_memory.reset_all()
             self.surprise_metric.past_surprise = None
             self.boundary_detector.reset()
+    
+    def resize_batch(self, new_batch_size: int):
+        """Resize memory buffers for new batch size.
+        
+        Args:
+            new_batch_size: New batch size
+        """
+        if new_batch_size != self.batch_size:
+            self.hierarchical_memory.resize_batch(new_batch_size)
+            self.batch_size = new_batch_size
