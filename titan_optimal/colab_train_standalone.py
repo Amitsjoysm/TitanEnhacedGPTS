@@ -93,7 +93,7 @@ def clone_repo():
     # Add to path
     sys.path.append(repo_path)
     sys.path.append(f"{repo_path}/ch04/01_main-chapter-code")
-    sys.path.append(f"{repo_path}/titan-optimal")
+    sys.path.append(f"{repo_path}/titan_optimal")
     
     return repo_path
 

@@ -215,9 +215,9 @@ for epoch in range(num_epochs):
 print("\n" + "="*80)
 print("SAVING MODEL")
 print("="*80)
-os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
-torch.save(model.state_dict(), "/app/titan-optimal/checkpoints/titan_v3_small_minimal.pth")
-print("✅ Model saved: /app/titan-optimal/checkpoints/titan_v3_small_minimal.pth")
+os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
+torch.save(model.state_dict(), "/app/titan_optimal/checkpoints/titan_v3_small_minimal.pth")
+print("✅ Model saved: /app/titan_optimal/checkpoints/titan_v3_small_minimal.pth")
 
 # Save results
 results = {
@@ -230,10 +230,10 @@ results = {
     "val_losses": val_losses,
 }
 
-with open("/app/titan-optimal/v3_minimal_results.json", "w") as f:
+with open("/app/titan_optimal/v3_minimal_results.json", "w") as f:
     json.dump(results, f, indent=2)
 
-print("✅ Results saved: /app/titan-optimal/v3_minimal_results.json")
+print("✅ Results saved: /app/titan_optimal/v3_minimal_results.json")
 
 # Final summary
 print("\n" + "="*80)
@@ -281,6 +281,6 @@ print("✅ All Improvements Implemented")
 print("✅ Evaluation Complete")
 print("✅ Logs Checked")
 print("\nOutputs:")
-print("  - Model: /app/titan-optimal/checkpoints/titan_v3_small_minimal.pth")
-print("  - Results: /app/titan-optimal/v3_minimal_results.json")
+print("  - Model: /app/titan_optimal/checkpoints/titan_v3_small_minimal.pth")
+print("  - Results: /app/titan_optimal/v3_minimal_results.json")
 print("="*80)

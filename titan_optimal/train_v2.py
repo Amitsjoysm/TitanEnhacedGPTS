@@ -267,8 +267,8 @@ def plot_comprehensive_comparison(results: dict, save_path: str = None):
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"\nPlot saved to: {save_path}")
     else:
-        plt.savefig("/app/titan-optimal/training_comparison_v2.png", dpi=300, bbox_inches='tight')
-        print(f"\nPlot saved to: /app/titan-optimal/training_comparison_v2.png")
+        plt.savefig("/app/titan_optimal/training_comparison_v2.png", dpi=300, bbox_inches='tight')
+        print(f"\nPlot saved to: /app/titan_optimal/training_comparison_v2.png")
 
 
 def main():
@@ -438,10 +438,10 @@ def main():
         
         # Save models for this size
         print(f"\nSaving {size} models...")
-        os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
-        torch.save(baseline_model.state_dict(), f"/app/titan-optimal/checkpoints/baseline_{size}_v2.pth")
-        torch.save(titan_v1_model.state_dict(), f"/app/titan-optimal/checkpoints/titan_v1_{size}.pth")
-        torch.save(titan_v2_model.state_dict(), f"/app/titan-optimal/checkpoints/titan_v2_{size}.pth")
+        os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
+        torch.save(baseline_model.state_dict(), f"/app/titan_optimal/checkpoints/baseline_{size}_v2.pth")
+        torch.save(titan_v1_model.state_dict(), f"/app/titan_optimal/checkpoints/titan_v1_{size}.pth")
+        torch.save(titan_v2_model.state_dict(), f"/app/titan_optimal/checkpoints/titan_v2_{size}.pth")
         print(f"Saved {size} models to checkpoints/")
     
     # Plot comprehensive results
@@ -497,8 +497,8 @@ def main():
     print("✓ Separate training/inference modes")
     print("✓ Both Small (124M) and Medium (340M) model sizes")
     print("✓ Comprehensive evaluation (loss, perplexity, inference speed)")
-    print("\nCheckpoints saved to: /app/titan-optimal/checkpoints/")
-    print("Plots saved to: /app/titan-optimal/training_comparison_v2.png")
+    print("\nCheckpoints saved to: /app/titan_optimal/checkpoints/")
+    print("Plots saved to: /app/titan_optimal/training_comparison_v2.png")
     print("="*80)
 
 

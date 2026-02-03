@@ -34,7 +34,7 @@ Titan-Optimal is a novel LLM architecture that combines two cutting-edge researc
 ## Project Structure
 
 ```
-titan-optimal/
+titan_optimal/
 ├── models/
 │   ├── neural_memory.py       # Neural long-term memory module
 │   └── titan_gpt.py          # Complete Titan-GPT architecture
@@ -67,7 +67,7 @@ Each size is available with or without neural memory for comparison.
 ### Installation
 
 ```bash
-cd /app/titan-optimal
+cd /app/titan_optimal
 
 # Install additional dependencies (if needed)
 pip install matplotlib numpy requests

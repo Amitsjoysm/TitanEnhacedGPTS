@@ -176,7 +176,7 @@ Retrieve & Decompress when needed
 
 ### Installation
 ```bash
-cd /app/titan-optimal
+cd /app/titan_optimal
 
 # All dependencies already in requirements.txt
 # torch, tiktoken, matplotlib, numpy
@@ -228,8 +228,8 @@ The training script tracks:
 4. **Memory Usage** (efficiency)
 
 Results saved to:
-- Models: `/app/titan-optimal/checkpoints/`
-- Plots: `/app/titan-optimal/training_comparison_v2.png`
+- Models: `/app/titan_optimal/checkpoints/`
+- Plots: `/app/titan_optimal/training_comparison_v2.png`
 
 ## 📊 Expected Performance
 
@@ -254,7 +254,7 @@ Based on the architectural improvements:
 ### Core Files
 
 ```
-titan-optimal/
+titan_optimal/
 ├── models/
 │   ├── neural_memory_v2.py      # Enhanced memory module
 │   └── titan_gpt_v2.py          # Enhanced GPT model

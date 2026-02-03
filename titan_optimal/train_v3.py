@@ -366,8 +366,8 @@ def plot_comprehensive_comparison_v3(results: Dict, save_path: str = None):
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"\nPlot saved to: {save_path}")
     else:
-        plt.savefig("/app/titan-optimal/training_comparison_v3.png", dpi=300, bbox_inches='tight')
-        print(f"\nPlot saved to: /app/titan-optimal/training_comparison_v3.png")
+        plt.savefig("/app/titan_optimal/training_comparison_v3.png", dpi=300, bbox_inches='tight')
+        print(f"\nPlot saved to: /app/titan_optimal/training_comparison_v3.png")
 
 
 def main():
@@ -530,10 +530,10 @@ def main():
         
         # Save models
         print(f"\nSaving {size} models...")
-        os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
-        torch.save(baseline_model.state_dict(), f"/app/titan-optimal/checkpoints/baseline_{size}_v3.pth")
-        torch.save(v2_model.state_dict(), f"/app/titan-optimal/checkpoints/titan_v2_{size}_comparison.pth")
-        torch.save(v3_model.state_dict(), f"/app/titan-optimal/checkpoints/titan_v3_{size}.pth")
+        os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
+        torch.save(baseline_model.state_dict(), f"/app/titan_optimal/checkpoints/baseline_{size}_v3.pth")
+        torch.save(v2_model.state_dict(), f"/app/titan_optimal/checkpoints/titan_v2_{size}_comparison.pth")
+        torch.save(v3_model.state_dict(), f"/app/titan_optimal/checkpoints/titan_v3_{size}.pth")
         print(f"Saved {size} models")
     
     # Plot comprehensive results
@@ -596,10 +596,10 @@ def main():
             "has_diversity_loss": len(data.get("diversity_losses", [])) > 0
         }
     
-    with open("/app/titan-optimal/v3_results.json", "w") as f:
+    with open("/app/titan_optimal/v3_results.json", "w") as f:
         json.dump(results_summary, f, indent=2)
     
-    print("Results saved to: /app/titan-optimal/v3_results.json")
+    print("Results saved to: /app/titan_optimal/v3_results.json")
     
     print("\n" + "="*80)
     print("🎉 TRAINING COMPLETE!")
@@ -609,9 +609,9 @@ def main():
     print("✅ Comprehensive metrics tracked")
     print("✅ Ready for critical thinking evaluation")
     print("\nOutputs:")
-    print("  - Checkpoints: /app/titan-optimal/checkpoints/")
-    print("  - Plots: /app/titan-optimal/training_comparison_v3.png")
-    print("  - Results: /app/titan-optimal/v3_results.json")
+    print("  - Checkpoints: /app/titan_optimal/checkpoints/")
+    print("  - Plots: /app/titan_optimal/training_comparison_v3.png")
+    print("  - Results: /app/titan_optimal/v3_results.json")
     print("="*80)
 
 

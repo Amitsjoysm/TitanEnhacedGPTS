@@ -207,9 +207,9 @@ print("TRAINING COMPLETE")
 print(f"{'='*80}\n")
 
 # Save model
-os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
-torch.save(model.state_dict(), "/app/titan-optimal/checkpoints/titan_v3_small.pth")
-print("✅ Model saved to: /app/titan-optimal/checkpoints/titan_v3_small.pth")
+os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
+torch.save(model.state_dict(), "/app/titan_optimal/checkpoints/titan_v3_small.pth")
+print("✅ Model saved to: /app/titan_optimal/checkpoints/titan_v3_small.pth")
 
 # Save results
 results = {
@@ -222,10 +222,10 @@ results = {
     "context_length": context_length,
 }
 
-with open("/app/titan-optimal/v3_small_results.json", "w") as f:
+with open("/app/titan_optimal/v3_small_results.json", "w") as f:
     json.dump(results, f, indent=2)
 
-print("✅ Results saved to: /app/titan-optimal/v3_small_results.json")
+print("✅ Results saved to: /app/titan_optimal/v3_small_results.json")
 
 print(f"\nFinal Results:")
 print(f"  Train Loss: {results['final_train_loss']:.4f}")
@@ -262,6 +262,6 @@ print(f"\n{'='*80}")
 print("🎉 TRAINING AND EVALUATION COMPLETE!")
 print(f"{'='*80}")
 print("\nOutputs:")
-print("  - Model: /app/titan-optimal/checkpoints/titan_v3_small.pth")
-print("  - Results: /app/titan-optimal/v3_small_results.json")
+print("  - Model: /app/titan_optimal/checkpoints/titan_v3_small.pth")
+print("  - Results: /app/titan_optimal/v3_small_results.json")
 print(f"{'='*80}")

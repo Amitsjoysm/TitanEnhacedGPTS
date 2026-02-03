@@ -309,16 +309,16 @@ def main():
     print(f"\n{'='*80}")
     print("Saving MEDIUM model...")
     print(f"{'='*80}")
-    os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
+    os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
     torch.save(
         titan_v2_model.state_dict(),
-        "/app/titan-optimal/checkpoints/titan_v2_medium.pth"
+        "/app/titan_optimal/checkpoints/titan_v2_medium.pth"
     )
     print(f"✓ Saved to checkpoints/titan_v2_medium.pth")
     
     # Save training results
     import json
-    with open("/app/titan-optimal/medium_training_results.json", "w") as f:
+    with open("/app/titan_optimal/medium_training_results.json", "w") as f:
         json.dump({
             "model_size": "medium",
             "parameters": count_parameters(titan_v2_model),
@@ -343,8 +343,8 @@ def main():
     print("BOTH MODELS TRAINED SUCCESSFULLY!")
     print("="*80)
     print("\nCheckpoints:")
-    print("  ✓ /app/titan-optimal/checkpoints/titan_v2_small.pth")
-    print("  ✓ /app/titan-optimal/checkpoints/titan_v2_medium.pth")
+    print("  ✓ /app/titan_optimal/checkpoints/titan_v2_small.pth")
+    print("  ✓ /app/titan_optimal/checkpoints/titan_v2_medium.pth")
     print("\nKey V2 Features:")
     print("  ✓ Gradient-free surprise metrics")
     print("  ✓ Hierarchical 3-tier memory")

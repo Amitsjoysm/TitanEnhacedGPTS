@@ -298,11 +298,11 @@ CONFIG = {
    ```python
    import sys
    sys.path.append('/content/LLMs-from-scratch')
-   sys.path.append('/content/LLMs-from-scratch/titan-optimal')
+   sys.path.append('/content/LLMs-from-scratch/titan_optimal')
    ```
 3. Verify files exist:
    ```bash
-   !ls -la /content/LLMs-from-scratch/titan-optimal/models/
+   !ls -la /content/LLMs-from-scratch/titan_optimal/models/
    ```
 
 ---

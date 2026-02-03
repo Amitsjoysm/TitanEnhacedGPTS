@@ -246,8 +246,8 @@ def plot_results(results: dict, save_path: str = None):
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"\n✓ Plot saved to: {save_path}")
     else:
-        plt.savefig("/app/titan-optimal/training_v2_only.png", dpi=300, bbox_inches='tight')
-        print(f"\n✓ Plot saved to: /app/titan-optimal/training_v2_only.png")
+        plt.savefig("/app/titan_optimal/training_v2_only.png", dpi=300, bbox_inches='tight')
+        print(f"\n✓ Plot saved to: /app/titan_optimal/training_v2_only.png")
 
 
 def main():
@@ -363,10 +363,10 @@ def main():
         
         # Save model
         print(f"\nSaving {size} model...")
-        os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
+        os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
         torch.save(
             titan_v2_model.state_dict(),
-            f"/app/titan-optimal/checkpoints/titan_v2_{size}.pth"
+            f"/app/titan_optimal/checkpoints/titan_v2_{size}.pth"
         )
         print(f"✓ Saved to checkpoints/titan_v2_{size}.pth")
     
@@ -396,10 +396,10 @@ def main():
     print("\n" + "="*80)
     print("TRAINING COMPLETE! ✓")
     print("="*80)
-    print("\nModels saved to: /app/titan-optimal/checkpoints/")
+    print("\nModels saved to: /app/titan_optimal/checkpoints/")
     print("  - titan_v2_small.pth  (124M parameters)")
     print("  - titan_v2_medium.pth (340M parameters)")
-    print("\nPlot saved to: /app/titan-optimal/training_v2_only.png")
+    print("\nPlot saved to: /app/titan_optimal/training_v2_only.png")
     print("\nKey V2 Features Trained:")
     print("  ✓ Gradient-free surprise metrics")
     print("  ✓ Hierarchical 3-tier memory")

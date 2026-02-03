@@ -334,8 +334,8 @@ def plot_training_results(results: Dict, save_path: str = None):
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"\nPlot saved to: {save_path}")
     else:
-        plt.savefig("/app/titan-optimal/training_v3_small.png", dpi=300, bbox_inches='tight')
-        print(f"\nPlot saved to: /app/titan-optimal/training_v3_small.png")
+        plt.savefig("/app/titan_optimal/training_v3_small.png", dpi=300, bbox_inches='tight')
+        print(f"\nPlot saved to: /app/titan_optimal/training_v3_small.png")
 
 
 def main():
@@ -451,9 +451,9 @@ def main():
     
     # Save model
     print(f"\nSaving model...")
-    os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
-    torch.save(v3_model.state_dict(), "/app/titan-optimal/checkpoints/titan_v3_small.pth")
-    print(f"✅ Model saved to: /app/titan-optimal/checkpoints/titan_v3_small.pth")
+    os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
+    torch.save(v3_model.state_dict(), "/app/titan_optimal/checkpoints/titan_v3_small.pth")
+    print(f"✅ Model saved to: /app/titan_optimal/checkpoints/titan_v3_small.pth")
     
     # Plot results
     print("\nGenerating plots...")
@@ -471,10 +471,10 @@ def main():
         "total_params": count_parameters(v3_model)
     }
     
-    with open("/app/titan-optimal/v3_small_results.json", "w") as f:
+    with open("/app/titan_optimal/v3_small_results.json", "w") as f:
         json.dump(results_summary, f, indent=2)
     
-    print("✅ Results saved to: /app/titan-optimal/v3_small_results.json")
+    print("✅ Results saved to: /app/titan_optimal/v3_small_results.json")
     
     # Final summary
     print("\n" + "="*80)
@@ -531,9 +531,9 @@ def main():
     print("✅ Evaluation Complete")
     print("✅ Logs Checked")
     print("\nOutputs:")
-    print("  - Model: /app/titan-optimal/checkpoints/titan_v3_small.pth")
-    print("  - Plot: /app/titan-optimal/training_v3_small.png")
-    print("  - Results: /app/titan-optimal/v3_small_results.json")
+    print("  - Model: /app/titan_optimal/checkpoints/titan_v3_small.pth")
+    print("  - Plot: /app/titan_optimal/training_v3_small.png")
+    print("  - Results: /app/titan_optimal/v3_small_results.json")
     print("="*80)
 
 

@@ -210,7 +210,7 @@ if __name__ == "__main__":
     # Example usage
     dataset = create_reasoning_dataset(
         num_problems=100,
-        save_path="/app/titan-optimal/data/synthetic_reasoning_100.json"
+        save_path="/app/titan_optimal/data/synthetic_reasoning_100.json"
     )
     
     print(f"Generated {len(dataset)} problems")

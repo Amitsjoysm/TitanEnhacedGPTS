@@ -203,8 +203,8 @@ def plot_comparison(
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"\nPlot saved to: {save_path}")
     else:
-        plt.savefig("/app/titan-optimal/training_comparison.png", dpi=300, bbox_inches='tight')
-        print(f"\nPlot saved to: /app/titan-optimal/training_comparison.png")
+        plt.savefig("/app/titan_optimal/training_comparison.png", dpi=300, bbox_inches='tight')
+        print(f"\nPlot saved to: /app/titan_optimal/training_comparison.png")
 
 
 def main():
@@ -358,12 +358,12 @@ def main():
     print("Saving models...")
     print("="*60)
     
-    os.makedirs("/app/titan-optimal/checkpoints", exist_ok=True)
-    torch.save(baseline_model.state_dict(), "/app/titan-optimal/checkpoints/baseline_gpt.pth")
-    torch.save(titan_mac_model.state_dict(), "/app/titan-optimal/checkpoints/titan_mac.pth")
-    torch.save(titan_mag_model.state_dict(), "/app/titan-optimal/checkpoints/titan_mag.pth")
+    os.makedirs("/app/titan_optimal/checkpoints", exist_ok=True)
+    torch.save(baseline_model.state_dict(), "/app/titan_optimal/checkpoints/baseline_gpt.pth")
+    torch.save(titan_mac_model.state_dict(), "/app/titan_optimal/checkpoints/titan_mac.pth")
+    torch.save(titan_mag_model.state_dict(), "/app/titan_optimal/checkpoints/titan_mag.pth")
     
-    print("Models saved to /app/titan-optimal/checkpoints/")
+    print("Models saved to /app/titan_optimal/checkpoints/")
     
     # Plot results
     print("\n" + "="*60)
