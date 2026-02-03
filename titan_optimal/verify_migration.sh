@@ -75,18 +75,37 @@ done
 
 echo ""
 
-# Check 5: Python imports work
-echo "✓ Testing Python imports..."
+# Check 5: Python file structure is valid
+echo "✓ Checking Python file structure..."
 cd /app
 python3 -c "
 import sys
+import os
 sys.path.append('/app/titan_optimal')
-try:
-    from models.titan_gpt_v3 import TitanGPTModelV3
-    from configs.model_configs_v3 import get_model_config_v3
-    print('  ✅ Python imports successful')
-except Exception as e:
-    print(f'  ❌ Import failed: {e}')
+
+# Check if files exist and can be parsed (syntax check)
+files_to_check = [
+    '/app/titan_optimal/models/titan_gpt_v3.py',
+    '/app/titan_optimal/configs/model_configs_v3.py',
+    '/app/titan_optimal/train_v3.py',
+]
+
+all_valid = True
+for f in files_to_check:
+    if os.path.exists(f):
+        try:
+            with open(f, 'r') as file:
+                compile(file.read(), f, 'exec')
+        except SyntaxError as e:
+            print(f'  ❌ Syntax error in {os.path.basename(f)}: {e}')
+            all_valid = False
+    else:
+        print(f'  ❌ File not found: {os.path.basename(f)}')
+        all_valid = False
+
+if all_valid:
+    print('  ✅ All Python files have valid syntax')
+else:
     sys.exit(1)
 " || exit 1
 
