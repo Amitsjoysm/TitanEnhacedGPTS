@@ -22,6 +22,11 @@ Key Improvements over V2:
 - Smarter consolidation (surprise-driven + episodic)
 - Better forgetting (importance decay)
 - Improved coverage (diversity loss)
+
+IMPROVEMENTS:
+- Dynamic batch size resizing
+- Memory budget/pressure management
+- Auxiliary loss scaling
 """
 
 import torch
