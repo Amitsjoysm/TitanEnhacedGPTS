@@ -200,7 +200,10 @@ class IntegratedMemoryCompression(nn.Module):
 
 
 class HierarchicalMemoryV3(nn.Module):
-    """Enhanced 3-tier hierarchical memory with all V3 improvements."""
+    """Enhanced 3-tier hierarchical memory with all V3 improvements.
+    
+    IMPROVEMENT: Added memory budget management and pressure monitoring.
+    """
     
     def __init__(
         self,
@@ -219,6 +222,11 @@ class HierarchicalMemoryV3(nn.Module):
         self.medium_term_size = medium_term_size
         self.long_term_size = long_term_size
         self.use_compression = use_compression
+        
+        # IMPROVEMENT: Memory budget tracking
+        self.register_buffer('short_term_usage', torch.tensor(0.0))
+        self.register_buffer('medium_term_usage', torch.tensor(0.0))
+        self.register_buffer('long_term_usage', torch.tensor(0.0))
         
         # Short-term: GPU-efficient circular buffer (Issue #1 fix)
         self.short_term_buffer = CircularTensorBuffer(
