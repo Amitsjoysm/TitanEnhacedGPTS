@@ -226,6 +226,11 @@ class TitanTransformerBlockV3(nn.Module):
         x = x + shortcut
         
         return x, aux_losses
+    
+    def resize_batch(self, new_batch_size: int):
+        """Resize memory buffers for new batch size."""
+        if self.use_memory:
+            self.neural_memory.resize_batch(new_batch_size)
 
 
 class TitanGPTModelV3(nn.Module):
